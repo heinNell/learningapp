@@ -81,6 +81,12 @@ export const familyRoles = {
     description: 'Share stories, provide gentle guidance, celebrate achievements',
     abilities: ['storytelling', 'gentle_encouragement', 'cultural_knowledge', 'patience_modeling'],
     avatar: '👴👵'
+  },
+  guardian: {
+    name: 'Learning Guide',
+    description: 'Support, encourage, and create a safe learning environment',
+    abilities: ['guidance', 'encouragement', 'safety_monitoring', 'progress_tracking'],
+    avatar: '👨‍🏫'
   }
 }
 

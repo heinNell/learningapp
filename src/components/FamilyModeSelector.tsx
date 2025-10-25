@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FamilyMember, FamilySession, familyRoles, familyActivities, generateFamilyChallenge } from '../data/familyModeData'
+import { FamilyMember, FamilySession, familyRoles, familyActivities } from '../data/familyModeData'
 import { useVoice } from '../hooks/useVoice'
 
 interface FamilyModeSelectorProps {
@@ -40,7 +40,7 @@ export const FamilyModeSelector: React.FC<FamilyModeSelectorProps> = ({
       const member: FamilyMember = {
         id: `member_${Date.now()}`,
         name: newMember.name,
-        role: newMember.role as any,
+        role: newMember.role as FamilyMember['role'],
         avatar: familyRoles[newMember.role as keyof typeof familyRoles]?.avatar || '👤',
         age: newMember.age,
         preferences: {
@@ -446,7 +446,7 @@ export const FamilyModeSelector: React.FC<FamilyModeSelectorProps> = ({
                   </label>
                   <select
                     value={newMember.role || ''}
-                    onChange={(e) => setNewMember({ ...newMember, role: e.target.value as any })}
+                    onChange={(e) => setNewMember({ ...newMember, role: e.target.value as FamilyMember['role'] })}
                     className={`w-full p-3 rounded-2xl ${
                       highContrast 
                         ? 'bg-gray-800 text-white border-2 border-yellow-400' 

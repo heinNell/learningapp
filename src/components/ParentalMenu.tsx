@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { supabase } from '../lib/supabase'
 import { categories } from '../data/quizData'
+import { AnalyticsDashboard } from './AnalyticsDashboard'
 
 interface ParentalMenuProps {
   isOpen: boolean
@@ -26,6 +27,7 @@ export const ParentalMenu: React.FC<ParentalMenuProps> = ({
 }) => {
   const [localSettings, setLocalSettings] = useState(settings)
   const [showResetConfirm, setShowResetConfirm] = useState(false)
+  const [showAnalytics, setShowAnalytics] = useState(false)
 
   useEffect(() => {
     setLocalSettings(settings)
@@ -50,6 +52,36 @@ export const ParentalMenu: React.FC<ParentalMenuProps> = ({
         [categoryId]: !prev.categories_enabled[categoryId]
       }
     }))
+  }
+
+  const handleApplyRecommendation = (action: string, category?: string) => {
+    // Close analytics and apply recommendation
+    setShowAnalytics(false)
+    
+    // Apply the recommendation
+    if (action.includes('Increase difficulty')) {
+      setLocalSettings(prev => ({ ...prev, difficulty: 'advanced' }))
+    } else if (action.includes('Decrease difficulty')) {
+      setLocalSettings(prev => ({ ...prev, difficulty: 'beginner' }))
+    }
+    
+    // Auto-save the changes
+    setTimeout(() => {
+      handleSave()
+    }, 500)
+  }
+
+  // Show Analytics Dashboard if requested
+  if (showAnalytics && isOpen) {
+    return (
+      <AnalyticsDashboard
+        userId="guest"
+        userName="Child"
+        highContrast={localSettings.high_contrast}
+        onClose={() => setShowAnalytics(false)}
+        onApplyRecommendation={handleApplyRecommendation}
+      />
+    )
   }
 
   return (
@@ -152,6 +184,20 @@ export const ParentalMenu: React.FC<ParentalMenuProps> = ({
                   </div>
                 </label>
               </div>
+            </div>
+
+            {/* Analytics Dashboard */}
+            <div className="mb-8">
+              <h3 className="text-xl font-bold text-gray-800 mb-4">
+                📊 Learning Analytics
+              </h3>
+              <button
+                onClick={() => setShowAnalytics(true)}
+                className="w-full p-4 bg-purple-500 text-white rounded-xl font-bold hover:bg-purple-600 transition-colors flex items-center justify-center gap-3"
+              >
+                <span>📈</span>
+                <span>View Detailed Analytics & AI Recommendations</span>
+              </button>
             </div>
 
             {/* Category Selection */}

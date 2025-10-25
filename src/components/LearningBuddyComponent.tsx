@@ -37,8 +37,10 @@ export const LearningBuddyComponent: React.FC<LearningBuddyComponentProps> = ({
     const response = generateBuddyResponse(buddy, context, performanceData)
     setCurrentResponse(response)
     
-    if (soundEnabled && response.text) {
-      speak(response.text)
+    // Only speak if not idle and sound enabled
+    if (soundEnabled && response.text && context !== 'idle') {
+      // Use less excited voice for buddy to not compete with main narration
+      speak(response.text, { isExcited: false })
     }
 
     // Update buddy state based on response
@@ -55,10 +57,14 @@ export const LearningBuddyComponent: React.FC<LearningBuddyComponentProps> = ({
     setLastInteraction(new Date())
   }, [buddy, context, performanceData, soundEnabled, speak])
 
-  // Generate response when context changes
+  // Generate response when context changes (with delay to prevent overlap)
   useEffect(() => {
     if (context !== 'idle') {
-      generateResponse()
+      // Delay buddy response to not overlap with main narration
+      const timer = setTimeout(() => {
+        generateResponse()
+      }, 1500) // Wait 1.5s for main narration to finish
+      return () => clearTimeout(timer)
     }
   }, [context, generateResponse])
 

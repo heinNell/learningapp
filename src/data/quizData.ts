@@ -197,6 +197,162 @@ export const quizData: QuizQuestion[] = [
     options: ['Yellow', 'Orange', 'Red', 'Pink'],
     correctAnswer: 'Orange',
     narration: 'What color is this? Is it Yellow, Orange, Red, or Pink?'
+  },
+
+  // Sounds - Animal Sounds
+  {
+    id: 'sound_1',
+    category: 'sounds',
+    question: 'What animal makes this sound?',
+    audio: '/sounds/lion-roar.mp3',
+    image: 'https://images.pexels.com/photos/792381/pexels-photo-792381.jpeg?auto=compress&cs=tinysrgb&w=400',
+    options: ['Lion', 'Tiger', 'Bear', 'Wolf'],
+    correctAnswer: 'Lion',
+    narration: 'Listen carefully. What animal makes this roaring sound?'
+  },
+  {
+    id: 'sound_2',
+    category: 'sounds',
+    question: 'What animal makes this sound?',
+    audio: '/sounds/dog-bark.mp3',
+    image: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=400',
+    options: ['Cat', 'Dog', 'Sheep', 'Cow'],
+    correctAnswer: 'Dog',
+    narration: 'Listen to this sound. Which animal barks like this?'
+  },
+  {
+    id: 'sound_3',
+    category: 'sounds',
+    question: 'What animal makes this sound?',
+    audio: '/sounds/cat-meow.mp3',
+    image: 'https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=400',
+    options: ['Dog', 'Cat', 'Bird', 'Mouse'],
+    correctAnswer: 'Cat',
+    narration: 'What animal makes this meowing sound?'
+  },
+  {
+    id: 'sound_4',
+    category: 'sounds',
+    question: 'What animal makes this sound?',
+    audio: '/sounds/cow-moo.mp3',
+    image: 'https://images.pexels.com/photos/422218/pexels-photo-422218.jpeg?auto=compress&cs=tinysrgb&w=400',
+    options: ['Horse', 'Cow', 'Sheep', 'Pig'],
+    correctAnswer: 'Cow',
+    narration: 'Listen! What farm animal makes this mooing sound?'
+  },
+  {
+    id: 'sound_5',
+    category: 'sounds',
+    question: 'What animal makes this sound?',
+    audio: '/sounds/bird-chirp.mp3',
+    image: 'https://images.pexels.com/photos/349758/hummingbird-bird-birds-349758.jpeg?auto=compress&cs=tinysrgb&w=400',
+    options: ['Cat', 'Dog', 'Bird', 'Frog'],
+    correctAnswer: 'Bird',
+    narration: 'What makes this chirping sound?'
+  },
+
+  // Sounds - Vehicle Sounds
+  {
+    id: 'sound_6',
+    category: 'sounds',
+    question: 'What makes this sound?',
+    audio: '/sounds/car-horn.mp3',
+    image: 'https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=400',
+    options: ['Car', 'Train', 'Boat', 'Airplane'],
+    correctAnswer: 'Car',
+    narration: 'Listen to this beep! What vehicle makes this honking sound?'
+  },
+  {
+    id: 'sound_7',
+    category: 'sounds',
+    question: 'What makes this sound?',
+    audio: '/sounds/train-whistle.mp3',
+    image: 'https://images.pexels.com/photos/2351883/pexels-photo-2351883.jpeg?auto=compress&cs=tinysrgb&w=400',
+    options: ['Car', 'Train', 'Truck', 'Bus'],
+    correctAnswer: 'Train',
+    narration: 'Choo choo! What makes this whistle sound?'
+  },
+  {
+    id: 'sound_8',
+    category: 'sounds',
+    question: 'What makes this sound?',
+    audio: '/sounds/airplane-engine.mp3',
+    image: 'https://images.pexels.com/photos/46148/aircraft-jet-landing-cloud-46148.jpeg?auto=compress&cs=tinysrgb&w=400',
+    options: ['Helicopter', 'Airplane', 'Rocket', 'Drone'],
+    correctAnswer: 'Airplane',
+    narration: 'Listen to this engine! What flies and makes this sound?'
+  },
+  {
+    id: 'sound_9',
+    category: 'sounds',
+    question: 'What makes this sound?',
+    audio: '/sounds/boat-horn.mp3',
+    image: 'https://images.pexels.com/photos/163236/luxury-yacht-boat-speed-water-163236.jpeg?auto=compress&cs=tinysrgb&w=400',
+    options: ['Car', 'Train', 'Boat', 'Truck'],
+    correctAnswer: 'Boat',
+    narration: 'What makes this deep horn sound on the water?'
+  },
+  {
+    id: 'sound_10',
+    category: 'sounds',
+    question: 'What makes this sound?',
+    audio: '/sounds/siren.mp3',
+    image: 'https://images.pexels.com/photos/1346155/pexels-photo-1346155.jpeg?auto=compress&cs=tinysrgb&w=400',
+    options: ['Police Car', 'Regular Car', 'Bicycle', 'Motorcycle'],
+    correctAnswer: 'Police Car',
+    narration: 'Listen! What emergency vehicle makes this siren sound?'
+  },
+
+  // Sounds - Environment & Nature
+  {
+    id: 'sound_11',
+    category: 'sounds',
+    question: 'What makes this sound?',
+    audio: '/sounds/rain.mp3',
+    image: 'https://images.pexels.com/photos/459451/pexels-photo-459451.jpeg?auto=compress&cs=tinysrgb&w=400',
+    options: ['Wind', 'Rain', 'Ocean', 'River'],
+    correctAnswer: 'Rain',
+    narration: 'Listen to this pitter-patter sound. What is it?'
+  },
+  {
+    id: 'sound_12',
+    category: 'sounds',
+    question: 'What makes this sound?',
+    audio: '/sounds/thunder.mp3',
+    image: 'https://images.pexels.com/photos/1112048/pexels-photo-1112048.jpeg?auto=compress&cs=tinysrgb&w=400',
+    options: ['Thunder', 'Drum', 'Fireworks', 'Explosion'],
+    correctAnswer: 'Thunder',
+    narration: 'Boom! What makes this loud rumbling sound in the sky?'
+  },
+  {
+    id: 'sound_13',
+    category: 'sounds',
+    question: 'What makes this sound?',
+    audio: '/sounds/ocean-waves.mp3',
+    image: 'https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=400',
+    options: ['River', 'Ocean', 'Waterfall', 'Fountain'],
+    correctAnswer: 'Ocean',
+    narration: 'Listen to these waves! What body of water makes this sound?'
+  },
+  {
+    id: 'sound_14',
+    category: 'sounds',
+    question: 'What makes this sound?',
+    audio: '/sounds/wind.mp3',
+    image: 'https://images.pexels.com/photos/414837/pexels-photo-414837.jpeg?auto=compress&cs=tinysrgb&w=400',
+    options: ['Wind', 'Fan', 'Whistle', 'Flute'],
+    correctAnswer: 'Wind',
+    narration: 'Whoosh! What makes this blowing sound in nature?'
+  },
+  {
+    id: 'sound_15',
+    category: 'sounds',
+    question: 'What makes this sound?',
+    audio: '/sounds/bell.mp3',
+    image: 'https://images.pexels.com/photos/2072039/pexels-photo-2072039.jpeg?auto=compress&cs=tinysrgb&w=400',
+    options: ['Bell', 'Drum', 'Piano', 'Guitar'],
+    correctAnswer: 'Bell',
+    narration: 'Ding dong! What makes this ringing sound?'
   }
 ]
 

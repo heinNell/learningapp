@@ -1,4 +1,3 @@
-
 export interface LearningBuddy {
   id: string
   name: string
@@ -27,7 +26,7 @@ export interface LearningBuddy {
 }
 
 export interface BuddyResponse {
-  type: 'encouragement' | 'celebration' | 'comfort' | 'guidance' | 'rest' | 'greeting'
+  type: 'encouragement' | 'celebration' | 'comfort' | 'guidance' | 'rest' | 'greeting' | 'correct' | 'incorrect' | 'goodbye' | 'idle'
   text: string
   animation: 'bounce' | 'spin' | 'dance' | 'sleep' | 'think' | 'cheer'
   emotion: string
@@ -117,10 +116,10 @@ export const defaultBuddies: LearningBuddy[] = [
 
 export const generateBuddyResponse = (
   buddy: LearningBuddy,
-  context: 'correct' | 'incorrect' | 'greeting' | 'goodbye' | 'encouragement' | 'rest',
-  performanceData?: { streak: number; accuracy: number; timeSpent: number }
+  context: 'correct' | 'incorrect' | 'greeting' | 'goodbye' | 'encouragement' | 'rest' | 'idle',
+  performanceData?: { streak: number; accuracy: number; timeSpent: number; category?: string }
 ): BuddyResponse => {
-  const responses = {
+  const responses: Record<string, Record<string, string[]>> = {
     correct: {
       cheerful: [
         "Hooray! That was absolutely amazing! 🎉",
@@ -201,25 +200,54 @@ export const generateBuddyResponse = (
         "HELLO! Time for some HIGH-ENERGY learning! 🚀",
         "HI! Let's make today AMAZING with super learning! 🌟"
       ]
+    },
+    goodbye: {
+      cheerful: ["See you soon! Keep being awesome! 👋"],
+      wise: ["Farewell, young scholar! Until we meet again! 📚"],
+      playful: ["Bye bye! Can't wait to play again! 🎈"],
+      gentle: ["Goodbye, dear friend. Rest well! 🌙"],
+      energetic: ["BYE! You were AMAZING today! ⚡"]
+    },
+    encouragement: {
+      cheerful: ["You're doing great! Keep it up! 🌟"],
+      wise: ["Your progress is remarkable! 📚"],
+      playful: ["Woohoo! You're a star! ⭐"],
+      gentle: ["You're doing wonderfully! 💖"],
+      energetic: ["KEEP GOING! You're AWESOME! 🚀"]
+    },
+    rest: {
+      cheerful: ["I'll rest here while you think... 😴"],
+      wise: ["Taking a moment to ponder... 🤔"],
+      playful: ["Just chilling for a bit! 😊"],
+      gentle: ["Resting peacefully... 🌙"],
+      energetic: ["Recharging my energy! ⚡"]
+    },
+    idle: {
+      cheerful: ["Ready when you are! 😊"],
+      wise: ["Awaiting your next question... 📚"],
+      playful: ["Let's go! 🎮"],
+      gentle: ["Take your time... 🌸"],
+      energetic: ["READY TO GO! ⚡"]
     }
   }
 
-  const personalityResponses = responses[context]?.[buddy.personality] || responses[context]?.cheerful || ["Great job!"]
+  const personalityResponses = responses[context]?.[buddy.personality] || responses['idle']?.[buddy.personality] || ["Great job!"]
   const randomResponse = personalityResponses[Math.floor(Math.random() * personalityResponses.length)]
 
-  const animations = {
+  const animations: Record<string, string[]> = {
     correct: ['bounce', 'dance', 'cheer', 'spin'],
     incorrect: ['think', 'bounce'],
     greeting: ['bounce', 'dance'],
     goodbye: ['bounce'],
     encouragement: ['cheer', 'bounce'],
-    rest: ['sleep']
+    rest: ['sleep'],
+    idle: ['bounce']
   }
 
   return {
     type: context,
     text: randomResponse,
-    animation: animations[context]?.[Math.floor(Math.random() * animations[context].length)] || 'bounce',
+    animation: (animations[context]?.[Math.floor(Math.random() * animations[context].length)] || 'bounce') as BuddyResponse['animation'],
     emotion: buddy.mood,
     voiceTone: buddy.personality === 'energetic' ? 'excited' : 
                buddy.personality === 'gentle' ? 'gentle' : 

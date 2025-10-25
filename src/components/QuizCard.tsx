@@ -23,14 +23,29 @@ export const QuizCard: React.FC<QuizCardProps> = ({
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null)
   const [showFeedback, setShowFeedback] = useState(false)
   const [timeLeft, setTimeLeft] = useState(difficulty === 'advanced' ? 30 : 0)
+  const [audioPlayed, setAudioPlayed] = useState(false)
+  const audioRef = React.useRef<HTMLAudioElement>(null)
 
   useEffect(() => {
+    // Reset audio state for new question
+    setAudioPlayed(false)
+    
     if (soundEnabled) {
-      // Read the question after a short delay
-      const timer = setTimeout(() => {
-        speak(question.narration)
-      }, 500)
-      return () => clearTimeout(timer)
+      // For sound questions, play audio automatically
+      if (question.audio && audioRef.current) {
+        const timer = setTimeout(() => {
+          audioRef.current?.play().catch(() => {
+            // Silently handle missing audio files - they're optional
+          })
+        }, 500)
+        return () => clearTimeout(timer)
+      } else {
+        // Read the question after a short delay
+        const timer = setTimeout(() => {
+          speak(question.narration)
+        }, 500)
+        return () => clearTimeout(timer)
+      }
     }
   }, [question, soundEnabled, speak])
 
@@ -52,9 +67,39 @@ export const QuizCard: React.FC<QuizCardProps> = ({
 
     if (soundEnabled) {
       if (isCorrect) {
-        speak(`Great job! That's a ${question.correctAnswer}!`)
+        // Warm, appreciative voice for correct answers
+        const encouragingPhrases = [
+          `Wonderful! You found the ${question.correctAnswer}!`,
+          `Yes! That's exactly right! It's a ${question.correctAnswer}!`,
+          `Perfect! You got it! That's a ${question.correctAnswer}!`,
+          `Amazing work! You chose the ${question.correctAnswer}!`,
+          `Brilliant! You're absolutely right! It's a ${question.correctAnswer}!`
+        ]
+        const phrase = encouragingPhrases[Math.floor(Math.random() * encouragingPhrases.length)]
+        
+        // Use slower, warmer, more appreciative tone
+        speak(phrase, { 
+          isExcited: true,  // This now uses rate: 0.9, pitch: 1.25
+          rate: 0.85,       // Even slower for complex words - warm teacher pace
+          pitch: 1.2,       // Warm, congratulatory tone
+          volume: 1.0
+        })
       } else {
-        speak("Oops! Let's try again!")
+        // Gentle, supportive voice for incorrect answers
+        const supportivePhrases = [
+          "That's okay! Let's think about it together!",
+          "Not quite, but you're doing great! Let's try another!",
+          "Nice try! Every answer helps you learn!",
+          "Almost! You're getting closer! Keep going!"
+        ]
+        const phrase = supportivePhrases[Math.floor(Math.random() * supportivePhrases.length)]
+        
+        speak(phrase, {
+          isExcited: false,
+          rate: 0.9,
+          pitch: 1.1,  // Lower, gentler tone
+          volume: 0.85
+        })
       }
     }
 
@@ -63,7 +108,7 @@ export const QuizCard: React.FC<QuizCardProps> = ({
       setSelectedAnswer(null)
       setShowFeedback(false)
       setTimeLeft(difficulty === 'advanced' ? 30 : 0)
-    }, 2000)
+    }, 2500)  // Slightly longer to let voice finish
   }
 
   const buttonVariants = {
@@ -98,6 +143,36 @@ export const QuizCard: React.FC<QuizCardProps> = ({
           <div className={`text-2xl font-bold ${timeLeft <= 5 ? 'text-red-500 animate-pulse' : 'text-white'}`}>
             ⏰ {timeLeft}s
           </div>
+        </div>
+      )}
+
+      {/* Audio Player for Sound Questions */}
+      {question.audio && (
+        <div className="mb-6 text-center">
+          <audio
+            ref={audioRef}
+            src={question.audio}
+            onEnded={() => setAudioPlayed(true)}
+            onError={() => {
+              // Silently handle missing audio - files are optional enhancements
+              setAudioPlayed(false)
+            }}
+          />
+          <motion.button
+            onClick={() => audioRef.current?.play()}
+            className={`px-8 py-4 rounded-2xl font-bold text-xl transition-all shadow-lg ${
+              highContrast
+                ? 'bg-yellow-400 text-black hover:bg-yellow-300'
+                : 'bg-white/90 text-purple-600 hover:bg-white'
+            }`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            🔊 {audioPlayed ? 'Play Sound Again' : 'Listen to Sound'}
+          </motion.button>
         </div>
       )}
 
@@ -157,10 +232,9 @@ export const QuizCard: React.FC<QuizCardProps> = ({
               animate={
                 isSelected 
                   ? isCorrect ? 'correct' : 'incorrect'
-                  : undefined
+                  : { opacity: 1, y: 0 }
               }
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 + index * 0.1 }}
               onClick={() => !showFeedback && handleAnswer(option, isCorrect)}
               disabled={showFeedback}

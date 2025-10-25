@@ -30,6 +30,7 @@ export interface AdaptiveRecommendation {
   action: string
   estimatedImpact: number
   confidence: number
+  category?: string
 }
 
 export interface MistakePattern {
@@ -125,7 +126,7 @@ export class AdaptiveLearningEngine {
       questionsAttempted: totalQuestions,
       categoriesExplored: [sessionData.category],
       improvementRate: this.calculateImprovementRate(userId, sessionData.category, accuracy),
-      consistencyScore: this.calculateConsistencyScore(userId, accuracy)
+      consistencyScore: this.calculateConsistencyScore(userId)
     }
 
     // Store performance history
@@ -147,7 +148,7 @@ export class AdaptiveLearningEngine {
     return currentAccuracy - previousAccuracy
   }
 
-  private calculateConsistencyScore(userId: string, currentAccuracy: number): number {
+  private calculateConsistencyScore(userId: string): number {
     const history = this.performanceHistory.get(userId) || []
     if (history.length < 3) return 0.5
 
@@ -214,7 +215,8 @@ export class AdaptiveLearningEngine {
         reason: `Identified weakness in ${weakCategories.join(', ')}`,
         action: `Focus on ${weakCategories[0]} category`,
         estimatedImpact: 0.7,
-        confidence: 0.8
+        confidence: 0.8,
+        category: weakCategories[0]
       })
     }
 
@@ -233,7 +235,7 @@ export class AdaptiveLearningEngine {
       mistakes: Array<{ questionId: string; selectedAnswer: string; correctAnswer: string }>
     }
   ) {
-    let pattern = this.learningPatterns.get(userId) || this.createDefaultPattern(userId)
+    const pattern = this.learningPatterns.get(userId) || this.createDefaultPattern(userId)
 
     // Update strengths and weaknesses
     if (sessionData.performance.accuracy > 0.8) {
@@ -305,7 +307,7 @@ export class AdaptiveLearningEngine {
     // Analyze mistake patterns
     mistakes.forEach(mistake => {
       const errorType = `${mistake.correctAnswer}_confused_with_${mistake.selectedAnswer}`
-      let existingError = categoryPattern!.commonErrors.find(e => e.errorType === errorType)
+      const existingError = categoryPattern!.commonErrors.find(e => e.errorType === errorType)
 
       if (existingError) {
         existingError.frequency++

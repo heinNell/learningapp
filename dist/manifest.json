@@ -1,0 +1,92 @@
+{
+  "name": "Kids Quiz Adventure",
+  "short_name": "Kids Quiz",
+  "description": "Educational quiz app for children ages 3-6",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFE66D",
+  "theme_color": "#FF6B6B",
+  "orientation": "landscape-primary",
+  "icons": [
+    {
+      "src": "https://images.pexels.com/photos/207665/pexels-photo-207665.jpeg?auto=compress&cs=tinysrgb&w=192&h=192&dpr=1",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "https://images.pexels.com/photos/207665/pexels-photo-207665.jpeg?auto=compress&cs=tinysrgb&w=512&h=512&dpr=1",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ],
+  "fruits": [
+    { "id": "papaya", "image": "/assets/fruits/papaya.png", "label": "Papaya" },
+    { "id": "blueberry", "image": "/assets/fruits/blueberry.png", "label": "Blueberry" }
+  ],
+  "shapes": [
+    { "id": "circle", "image": "/assets/shapes/circle.png", "label": "Circle" },
+    { "id": "square", "image": "/assets/shapes/square.png", "label": "Square" },
+    { "id": "triangle", "image": "/assets/shapes/triangle.png", "label": "Triangle" },
+    { "id": "rectangle", "image": "/assets/shapes/rectangle.png", "label": "Rectangle" },
+    { "id": "star", "image": "/assets/shapes/star.png", "label": "Star" },
+    { "id": "oval", "image": "/assets/shapes/oval.png", "label": "Oval" },
+    { "id": "heart", "image": "/assets/shapes/heart.png", "label": "Heart" },
+    { "id": "diamond", "image": "/assets/shapes/diamond.png", "label": "Diamond" },
+    { "id": "crescent", "image": "/assets/shapes/crescent.png", "label": "Crescent" },
+    { "id": "hexagon", "image": "/assets/shapes/hexagon.png", "label": "Hexagon" }
+  ],
+  "colors": [
+    { "id": "red_apple", "image": "/assets/colors/red_apple.png", "label": "Red Apple", "color": "Red" },
+    { "id": "blue_ball", "image": "/assets/colors/blue_ball.png", "label": "Blue Ball", "color": "Blue" },
+    { "id": "yellow_sun", "image": "/assets/colors/yellow_sun.png", "label": "Yellow Sun", "color": "Yellow" },
+    { "id": "green_leaf", "image": "/assets/colors/green_leaf.png", "label": "Green Leaf", "color": "Green" },
+    { "id": "purple_grape", "image": "/assets/colors/purple_grape.png", "label": "Purple Grape", "color": "Purple" },
+    { "id": "orange_carrot", "image": "/assets/colors/orange_carrot.png", "label": "Orange Carrot", "color": "Orange" },
+    { "id": "pink_flower", "image": "/assets/colors/pink_flower.png", "label": "Pink Flower", "color": "Pink" },
+    { "id": "brown_bear", "image": "/assets/colors/brown_bear.png", "label": "Brown Bear", "color": "Brown" }
+  ],
+  "sounds": [
+    { "id": "dog_bark", "audio": "/assets/sounds/dog_bark.mp3", "label": "Dog", "image": "/assets/animals/dog.png" },
+    { "id": "cat_meow", "audio": "/assets/sounds/cat_meow.mp3", "label": "Cat", "image": "/assets/animals/cat.png" },
+    { "id": "bird_chirp", "audio": "/assets/sounds/bird_chirp.mp3", "label": "Bird", "image": "/assets/animals/bird.png" },
+    { "id": "cow_moo", "audio": "/assets/sounds/cow_moo.mp3", "label": "Cow", "image": "/assets/animals/cow.png" },
+    { "id": "lion_roar", "audio": "/assets/sounds/lion_roar.mp3", "label": "Lion", "image": "/assets/animals/lion.png" },
+    { "id": "elephant_trumpet", "audio": "/assets/sounds/elephant_trumpet.mp3", "label": "Elephant", "image": "/assets/animals/elephant.png" },
+    { "id": "car_honk", "audio": "/assets/sounds/car_honk.mp3", "label": "Car", "image": "/assets/objects/car.png" },
+    { "id": "water_splash", "audio": "/assets/sounds/water_splash.mp3", "label": "Water", "image": "/assets/objects/water.png" },
+    { "id": "clock_tick", "audio": "/assets/sounds/clock_tick.mp3", "label": "Clock", "image": "/assets/objects/clock.png" },
+    { "id": "train_whistle", "audio": "/assets/sounds/train_whistle.mp3", "label": "Train", "image": "/assets/vehicles/train.png" },
+    { "id": "phone_ring", "audio": "/assets/sounds/phone_ring.mp3", "label": "Phone", "image": "/assets/objects/phone.png" },
+    { "id": "sheep_baa", "audio": "/assets/sounds/sheep_baa.mp3", "label": "Sheep", "image": "/assets/animals/sheep.png" },
+    { "id": "horse_neigh", "audio": "/assets/sounds/horse_neigh.mp3", "label": "Horse", "image": "/assets/animals/horse.png" },
+    { "id": "frog_croak", "audio": "/assets/sounds/frog_croak.mp3", "label": "Frog", "image": "/assets/animals/frog.png" },
+    { "id": "rain", "audio": "/assets/sounds/rain.mp3", "label": "Rain", "image": "/assets/objects/rain.png" }
+  ],
+  "narration_fallback": {
+    "phrases": {
+      "welcome": "/assets/narration/welcome.mp3",
+      "select_category": "/assets/narration/select_category.mp3",
+      "great_job": "/assets/narration/great_job.mp3",
+      "try_again": "/assets/narration/try_again.mp3",
+      "what_is_this_animal": "/assets/narration/what_is_this_animal.mp3",
+      "what_is_this_fruit": "/assets/narration/what_is_this_fruit.mp3",
+      "what_shape_is_this": "/assets/narration/what_shape_is_this.mp3",
+      "what_color_is_this": "/assets/narration/what_color_is_this.mp3",
+      "what_makes_this_sound": "/assets/narration/what_makes_this_sound.mp3"
+    }
+  },
+  "sfx": {
+    "applause": "/assets/sfx/applause.mp3",
+    "cheer": "/assets/sfx/cheer.mp3",
+    "jingle": "/assets/sfx/jingle.mp3",
+    "sparkle": "/assets/sfx/sparkle.mp3",
+    "pop": "/assets/sfx/pop.mp3"
+  },
+  "animations": [
+    "/assets/anim/confetti.json",
+    "/assets/anim/stars.json",
+    "/assets/anim/balloons.json",
+    "/assets/anim/fireworks.json",
+    "/assets/anim/sparkles.json"
+  ]
+}
